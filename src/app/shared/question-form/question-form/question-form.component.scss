@@ -1,0 +1,17 @@
+.form-array {
+  margin-bottom: 20px;
+  width: 100%;
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  app-input {
+    flex-grow: 2;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}

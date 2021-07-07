@@ -1,0 +1,24 @@
+<form [formGroup]="form">
+  <app-input [isReadOnly]="question.status === 'answered'" formControlName="title"></app-input>
+  <div class="answer" [ngSwitch]="question.type">
+    <ng-template [ngSwitchCase]="questionType.Multiple">
+      <div formArrayName="options">
+        <div class="form-array" *ngFor="let option of optionsFormArray.controls; let i = index" [formGroupName]="i">
+          <input type="checkbox" [disabled]="question.status === 'answered'">
+          <app-input formControlName="title" [isReadOnly]="question.status === 'answered'"></app-input>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template [ngSwitchCase]="questionType.Single">
+      <div formArrayName="options">
+        <div class="form-array" *ngFor="let option of optionsFormArray.controls; let i = index" [formGroupName]="i">
+          <input [disabled]="question.status === 'answered'" type="radio" formControlName="checked">
+          <app-input formControlName="title" [isReadOnly]="question.status === 'answered'"></app-input>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template [ngSwitchCase]="questionType.Open">
+      <app-input formControlName="answer"></app-input>
+    </ng-template>
+  </div>
+</form>

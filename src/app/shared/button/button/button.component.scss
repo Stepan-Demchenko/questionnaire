@@ -1,0 +1,42 @@
+.btn {
+  color: white;
+  font-weight: 500;
+  background: #e4c280;
+  outline: none !important;
+  cursor: pointer;
+  padding: 12px 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+  border-radius: 8px;
+  border: unset;
+
+  &:hover {
+    transition: all 0.3s ease;
+    background-color: #d9c6bd;
+  }
+
+  //&:after {
+  //  position: absolute;
+  //  content: "";
+  //  width: 0;
+  //  height: 100%;
+  //  top: 0;
+  //  left: 0;
+  //  direction: rtl;
+  //  z-index: -1;
+  //  background: #d9c6bd;
+  //  transition: all 0.3s ease;
+  //}
+  //
+  //&:hover:after {
+  //  left: auto;
+  //  right: 0;
+  //  width: 100%;
+  //}
+
+  //&:active {
+  //  top: 2px;
+  //}
+}
