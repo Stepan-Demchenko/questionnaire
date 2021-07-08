@@ -22,7 +22,7 @@ export class QuestionFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.createQuestionWithOptions();
+    this.initializeForm();
     if (this.question) {
       this.form.patchValue(this.question);
     }
@@ -33,22 +33,59 @@ export class QuestionFormComponent implements OnInit {
     return this.form.controls.options as FormArray;
   }
 
+  private initializeForm(): void {
+    switch (this.type) {
+      case QuestionType.Multiple:
+        this.createCheckBoxQuestionForm();
+        break;
+      case QuestionType.Single:
+        this.createSingleOptionQuestionForm();
+        break;
+      case QuestionType.Open:
+        this.form = this.fb.group({
+          title: ['', [Validators.required, Validators.minLength(10)]],
+          answer: ['']
+        });
+    }
+  }
 
-  private createQuestionWithOptions(): void {
+
+  private createCheckBoxQuestionForm(): void {
     this.form = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(10)]],
       options: this.fb.array([])
     });
-    this.addOption();
-    this.addOption();
+    this.addMultipleChoiceOption();
+    this.addMultipleChoiceOption();
   }
 
-  addOption(): void {
+  private createSingleOptionQuestionForm(): void {
+    this.form = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(10)]],
+      options: this.fb.array([
+        this.fb.control('', [Validators.required]),
+        this.fb.control('', [Validators.required])]),
+      answer: ['']
+    });
+  }
+
+  private addMultipleChoiceOption(): void {
     (this.form.controls['options'] as FormArray).push(this.fb.group({
       title: ['', Validators.required],
       checked: [false],
-      answer: ['']
     }));
+  }
+
+  private addSingleChoiceOption(): void {
+    (this.form.controls['options'] as FormArray).push(this.fb.control('', [Validators.required]));
+  }
+
+  addOption(): void {
+    if (this.type === QuestionType.Multiple) {
+      this.addMultipleChoiceOption();
+    } else if (this.type === QuestionType.Single) {
+      this.addSingleChoiceOption();
+    }
   }
 
   onSubmit(): void {

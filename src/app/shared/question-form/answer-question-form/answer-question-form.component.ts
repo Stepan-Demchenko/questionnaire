@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { Question } from '@shared/models/question';
+import { Option, Question } from '@shared/models/question';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { minSelectedCheckboxes } from '@shared/question-form/validators/min-selected-options.validator';
 import { QuestionType } from '@shared/enums/question-type';
@@ -29,8 +29,12 @@ export class AnswerQuestionFormComponent implements OnInit {
   private createForm(): void {
     this.form = this.fb.group({
       title: [''],
-      options: this.fb.array([], minSelectedCheckboxes(1))
+      options: [''],
+      answer: ['']
     });
     this.form.patchValue(this.question);
+
+    console.log(this.form.value);
+    this.form.valueChanges.subscribe(v => console.log(v));
   }
 }

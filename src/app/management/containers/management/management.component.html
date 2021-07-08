@@ -1,7 +1,8 @@
-<section class="management">
-  <article class="management__list">
+<section class="container">
+  <article class="management">
     <ng-container *ngIf="(questions$ | async)?.length; else emptyState">
-      <app-card *ngFor="let question of questions$ | async" [question]="question"></app-card>
+      <app-card *ngFor="let question of questions$ | async" [question]="question">
+      </app-card>
     </ng-container>
     <ng-template #emptyState>
       <h1>There no Questions yet</h1>

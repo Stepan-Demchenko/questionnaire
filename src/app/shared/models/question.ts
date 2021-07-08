@@ -4,7 +4,8 @@ export interface Question {
   id: string;
   title: string;
   type: QuestionType;
-  options: Option[];
+  options: Option[] | string[];
+  answer?: string;
   status: 'answered' | 'unanswered';
   createdAt: Date;
 }

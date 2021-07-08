@@ -1,3 +1,15 @@
 .answer {
   padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.option {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 15px;
+
+  &__input {
+    flex-grow: 2;
+  }
 }

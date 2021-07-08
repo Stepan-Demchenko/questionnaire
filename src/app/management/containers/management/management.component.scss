@@ -1,10 +1,11 @@
-.management {
-  margin-top: 35px;
-
-  &__list {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-  }
+:host {
+  display: flex;
+  justify-content: center;
 }
+
+.management {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+

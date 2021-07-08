@@ -7,13 +7,13 @@ import {
   ComponentFactoryResolver,
   OnDestroy
 } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Question } from '@shared/models/question';
 import { StoreService } from '@core/services/store.service';
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { QuestionType } from '@shared/enums/question-type';
-import { Subject } from 'rxjs';
 import { pairwise, startWith, takeUntil, tap } from 'rxjs/operators';
+import { QuestionType } from '@shared/enums/question-type';
+import { Router } from '@angular/router';
 import { QuestionFormComponent } from '@shared/question-form/question-form/question-form.component';
 
 @Component({

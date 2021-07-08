@@ -1,24 +1,25 @@
 <form [formGroup]="form">
   <app-input [isReadOnly]="question.status === 'answered'" formControlName="title"></app-input>
   <div class="answer" [ngSwitch]="question.type">
-    <ng-template [ngSwitchCase]="questionType.Multiple">
-      <div formArrayName="options">
-        <div class="form-array" *ngFor="let option of optionsFormArray.controls; let i = index" [formGroupName]="i">
-          <input type="checkbox" [disabled]="question.status === 'answered'">
-          <app-input formControlName="title" [isReadOnly]="question.status === 'answered'"></app-input>
-        </div>
-      </div>
-    </ng-template>
+    <!--    <ng-template [ngSwitchCase]="questionType.Multiple">-->
+    <!--      <div formArrayName="options">-->
+    <!--        <div class="option" *ngFor="let option of optionsFormArray.controls; let i = index">-->
+    <!--          <ng-container [formGroup]="option">-->
+    <!--            <input type="checkbox" formControlName="checked">-->
+    <!--            <app-input class="option__input" formControlName="title"-->
+    <!--                       [isReadOnly]="question.status === 'answered'"></app-input>-->
+    <!--          </ng-container>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </ng-template>-->
     <ng-template [ngSwitchCase]="questionType.Single">
-      <div formArrayName="options">
-        <div class="form-array" *ngFor="let option of optionsFormArray.controls; let i = index" [formGroupName]="i">
-          <input [disabled]="question.status === 'answered'" type="radio" formControlName="checked">
-          <app-input formControlName="title" [isReadOnly]="question.status === 'answered'"></app-input>
-        </div>
+      <div class="option" *ngFor="let option of form.value.options; let i = index">
+        <input type="radio" formControlName="answer" [value]="option">
+        <app-input class="option__input" [ngModel]="option" [isReadOnly]="question.status === 'answered'"></app-input>
       </div>
     </ng-template>
     <ng-template [ngSwitchCase]="questionType.Open">
-      <app-input formControlName="answer"></app-input>
+      <app-input class="option__input" formControlName="answer"></app-input>
     </ng-template>
   </div>
 </form>

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { QuestionFormComponent } from './question-form/question-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from '@shared/button/button.module';
 import { InputModule } from '@shared/input/input.module';
 import { AnswerQuestionFormComponent } from './answer-question-form/answer-question-form.component';
@@ -16,7 +16,8 @@ import { AnswerQuestionFormComponent } from './answer-question-form/answer-quest
     CommonModule,
     ReactiveFormsModule,
     ButtonModule,
-    InputModule
+    InputModule,
+    FormsModule
   ],
   exports: [
     QuestionFormComponent,
