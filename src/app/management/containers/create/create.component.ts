@@ -61,7 +61,7 @@ export class CreateComponent implements OnInit, OnDestroy {
   createQuestion(question: Question): void {
     this.storeService.add({
       ...question,
-      status: 'unanswered', id: Math.random().toString(36).substring(7),
+      id: Math.random().toString(36).substring(7),
       createdAt: new Date(),
     });
     this.router.navigate(['/management']);

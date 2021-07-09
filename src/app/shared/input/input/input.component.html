@@ -1,7 +1,6 @@
 <div class="form__group">
   <input
     type="text"
-    [readonly]="isReadOnly"
     [ngModel]="value"
     (ngModelChange)="updateValue($event)"
     [disabled]="disabled"

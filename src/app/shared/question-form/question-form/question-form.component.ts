@@ -34,58 +34,19 @@ export class QuestionFormComponent implements OnInit {
   }
 
   private initializeForm(): void {
-    switch (this.type) {
-      case QuestionType.Multiple:
-        this.createCheckBoxQuestionForm();
-        break;
-      case QuestionType.Single:
-        this.createSingleOptionQuestionForm();
-        break;
-      case QuestionType.Open:
-        this.form = this.fb.group({
-          title: ['', [Validators.required, Validators.minLength(10)]],
-          answer: ['']
-        });
-    }
-  }
-
-
-  private createCheckBoxQuestionForm(): void {
     this.form = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(10)]],
-      options: this.fb.array([])
+      options: this.fb.array([]),
     });
-    this.addMultipleChoiceOption();
-    this.addMultipleChoiceOption();
-  }
-
-  private createSingleOptionQuestionForm(): void {
-    this.form = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(10)]],
-      options: this.fb.array([
-        this.fb.control('', [Validators.required]),
-        this.fb.control('', [Validators.required])]),
-      answer: ['']
-    });
-  }
-
-  private addMultipleChoiceOption(): void {
-    (this.form.controls['options'] as FormArray).push(this.fb.group({
-      title: ['', Validators.required],
-      checked: [false],
-    }));
-  }
-
-  private addSingleChoiceOption(): void {
-    (this.form.controls['options'] as FormArray).push(this.fb.control('', [Validators.required]));
+    this.addOption();
+    this.addOption();
   }
 
   addOption(): void {
-    if (this.type === QuestionType.Multiple) {
-      this.addMultipleChoiceOption();
-    } else if (this.type === QuestionType.Single) {
-      this.addSingleChoiceOption();
-    }
+    (this.form.controls['options'] as FormArray).push(this.fb.group({
+      id: [Math.random().toString(36).substring(7)],
+      title: ['', Validators.required],
+    }));
   }
 
   onSubmit(): void {

@@ -1,24 +1,19 @@
 <form [formGroup]="form">
-  <app-input [isReadOnly]="question.status === 'answered'" formControlName="title"></app-input>
-  <div class="answer" [ngSwitch]="question.type">
-    <!--    <ng-template [ngSwitchCase]="questionType.Multiple">-->
-    <!--      <div formArrayName="options">-->
-    <!--        <div class="option" *ngFor="let option of optionsFormArray.controls; let i = index">-->
-    <!--          <ng-container [formGroup]="option">-->
-    <!--            <input type="checkbox" formControlName="checked">-->
-    <!--            <app-input class="option__input" formControlName="title"-->
-    <!--                       [isReadOnly]="question.status === 'answered'"></app-input>-->
-    <!--          </ng-container>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </ng-template>-->
-    <ng-template [ngSwitchCase]="questionType.Single">
-      <div class="option" *ngFor="let option of form.value.options; let i = index">
-        <input type="radio" formControlName="answer" [value]="option">
-        <app-input class="option__input" [ngModel]="option" [isReadOnly]="question.status === 'answered'"></app-input>
+  <app-input formControlName="title"></app-input>
+  <div class="answer">
+    <ng-container *ngIf="question.type !== questionType.Open">
+      <div class="option" *ngFor="let option of optionsFormArray.controls; let i = index">
+        <input
+          type="radio" formControlName="answer"
+          [attr.disabled]="question.answer"
+          [checked]="option.value.answer?.id === question.options[i].id"
+          [value]="option.value">
+        <ng-container [formGroup]="option">
+          <app-input class="option__input" formControlName="title"></app-input>
+        </ng-container>
       </div>
-    </ng-template>
-    <ng-template [ngSwitchCase]="questionType.Open">
+    </ng-container>
+    <ng-template #openQuestion>
       <app-input class="option__input" formControlName="answer"></app-input>
     </ng-template>
   </div>

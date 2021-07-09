@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from '@shared/button/button.module';
 import { InputModule } from '@shared/input/input.module';
 import { AnswerQuestionFormComponent } from './answer-question-form/answer-question-form.component';
+import { DisableControlModule } from '@shared/directives/disable-control/disable-control.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AnswerQuestionFormComponent } from './answer-question-form/answer-quest
     ReactiveFormsModule,
     ButtonModule,
     InputModule,
-    FormsModule
+    FormsModule,
+    DisableControlModule
   ],
   exports: [
     QuestionFormComponent,

@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { ListRoutingModule } from './list-routing.module';
 import { ListComponent } from './containers/list/list.component';
 import { CardModule } from '@shared/card/card.module';
+import { SortByStatusModule } from '@shared/pipes/sort-by-status/sort-by-status.module';
+import { FormsModule } from '@angular/forms';
+import { OrderByDateModule } from '@shared/pipes/order-by-date/order-by-date.module';
 
 
 @NgModule({
@@ -13,7 +16,10 @@ import { CardModule } from '@shared/card/card.module';
   imports: [
     CommonModule,
     ListRoutingModule,
-    CardModule
+    CardModule,
+    SortByStatusModule,
+    FormsModule,
+    OrderByDateModule
   ]
 })
 export class ListModule { }

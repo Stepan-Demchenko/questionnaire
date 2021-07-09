@@ -1,22 +1,10 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <app-input formControlName="title" placeholder="Type your question"></app-input>
-  <ng-container [ngSwitch]="type">
-    <ng-template [ngSwitchCase]="questionType.Single">
-      <div formArrayName="options">
-        <div class="form-array" *ngFor="let option of optionsFormArray.controls; let i = index">
-          <app-input  [formControlName]="i" placeholder="Option {{i+1}}"></app-input>
-        </div>
-      </div>
-    </ng-template>
-
-    <ng-template [ngSwitchCase]="questionType.Multiple">
-      <div formArrayName="options">
-        <div class="form-array" *ngFor="let option of optionsFormArray.controls; let i = index" [formGroupName]="i">
-          <app-input formControlName="title" placeholder="Option {{i+1}}"></app-input>
-        </div>
-      </div>
-    </ng-template>
-  </ng-container>
+  <div formArrayName="options" *ngIf="type !== questionType.Open">
+    <div class="form-array" *ngFor="let option of optionsFormArray.controls; let i = index" [formGroupName]="i">
+      <app-input formControlName="title" placeholder="Option {{i+1}}"></app-input>
+    </div>
+  </div>
   <div class="actions">
     <app-button typeOfButton="submit" text="Ok"></app-button>
     <app-button typeOfButton="button" text="Add Option" (click)="addOption()"></app-button>

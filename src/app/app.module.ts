@@ -16,8 +16,9 @@ import { LocalStorage } from '@core/consts/local-storage';
     NavModule
   ],
   providers: [
-    { provide: LocalStorage, useValue: window.localStorage}
+    {provide: LocalStorage, useValue: window.localStorage}
   ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

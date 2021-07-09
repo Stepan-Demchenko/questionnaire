@@ -1,1 +1,32 @@
-<app-card></app-card>
+<ng-container *ngIf="questions$ | async as questions">
+  <article class="list">
+    <div>
+      <h2>Not Answered Questions</h2>
+      <label class="select" for="slct">
+        <select id="slct" [(ngModel)]="orderUnanswered">
+          <option [value]="order.DESC">Oldest</option>
+          <option [value]="order.ASC" selected>Newest</option>
+        </select>
+        <svg>
+          <use xlink:href="#select-arrow-down"></use>
+        </svg>
+      </label>
+      <svg class="sprites">
+        <symbol id="select-arrow-down" viewbox="0 0 10 6">
+          <polyline points="1 1 5 5 9 1"></polyline>
+        </symbol>
+      </svg>
+      <ng-container *ngFor="let question of questions | sortByStatus: 'unanswered' | orderByDate: orderUnanswered">
+        <app-card [question]="question"></app-card>
+      </ng-container>
+    </div>
+    <div class="list__answered">
+      <h2>Answered Questions</h2>
+      <ng-container *ngFor="let question of questions | sortByStatus: 'answered' | orderByDate: orderAnswered">
+        <app-card [question]="question"></app-card>
+      </ng-container>
+    </div>
+  </article>
+</ng-container>
+
+
