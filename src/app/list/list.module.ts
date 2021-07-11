@@ -7,19 +7,21 @@ import { CardModule } from '@shared/card/card.module';
 import { SortByStatusModule } from '@shared/pipes/sort-by-status/sort-by-status.module';
 import { FormsModule } from '@angular/forms';
 import { OrderByDateModule } from '@shared/pipes/order-by-date/order-by-date.module';
+import {ButtonModule} from "@shared/button/button.module";
 
 
 @NgModule({
   declarations: [
     ListComponent
   ],
-  imports: [
-    CommonModule,
-    ListRoutingModule,
-    CardModule,
-    SortByStatusModule,
-    FormsModule,
-    OrderByDateModule
-  ]
+    imports: [
+        CommonModule,
+        ListRoutingModule,
+        CardModule,
+        SortByStatusModule,
+        FormsModule,
+        OrderByDateModule,
+        ButtonModule
+    ]
 })
 export class ListModule { }

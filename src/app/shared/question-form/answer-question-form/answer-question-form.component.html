@@ -1,20 +1,36 @@
 <form [formGroup]="form">
-  <app-input formControlName="title"></app-input>
-  <div class="answer">
-    <ng-container *ngIf="question.type !== questionType.Open">
-      <div class="option" *ngFor="let option of optionsFormArray.controls; let i = index">
-        <input
-          type="radio" formControlName="answer"
-          [attr.disabled]="question.answer"
-          [checked]="option.value.answer?.id === question.options[i].id"
-          [value]="option.value">
-        <ng-container [formGroup]="option">
-          <app-input class="option__input" formControlName="title"></app-input>
+    <app-input formControlName="title"></app-input>
+    <div class="answer">
+        <ng-container *ngIf="question.type !== questionType.Open">
+            <div class="option" *ngFor="let option of optionsFormArray.controls; let i = index">
+                <div>
+                    <ng-container
+                        *ngIf="question.type === questionType.Single; else multipleChoice"
+                    >
+                        <input
+                            (click)="selectOption(option.value)"
+                            type="radio"
+                            [disabled]="status !== 'unanswered'"
+                            [checked]=" form.value.answer && form.value.answer[0]?.id === question.options[i].id"
+                        />
+                    </ng-container>
+                    <ng-template #multipleChoice formArrayName="answer">
+                      <ng-container [formArrayName]="i">
+                        <input
+                        formControlName="checked"
+                        type="checkbox"
+                      />
+                      </ng-container>
+                    </ng-template>
+                </div>
+                <ng-container [formGroup]="option">
+                    <app-input class="option__input" formControlName="title"></app-input>
+                </ng-container>
+            </div>
         </ng-container>
-      </div>
-    </ng-container>
-    <ng-template #openQuestion>
-      <app-input class="option__input" formControlName="answer"></app-input>
-    </ng-template>
-  </div>
+        <ng-template #openQuestion>
+            <app-input class="option__input" formControlName="answer"></app-input>
+        </ng-template>
+    </div>
+    <app-button *ngIf="!question.answer?.length" text="Accept" (click)="accept()"></app-button>
 </form>

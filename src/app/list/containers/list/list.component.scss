@@ -15,12 +15,19 @@
     padding: 10px;
   }
 
+  &__box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   &__answered {
     border-left: 4px solid blue;
   }
 }
 
 .select {
+  width: 100%;
   position: relative;
   min-width: 200px;
 
@@ -88,5 +95,14 @@
   height: 0;
   pointer-events: none;
   user-select: none;
+}
+
+.empty-state{
+  margin-top: 25px;
+  text-align: center;
+  color: #e4c280;
+  h2 {
+    margin-bottom: 25px;
+  }
 }
 

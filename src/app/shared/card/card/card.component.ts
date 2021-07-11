@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Question } from '@shared/models/question';
 
 @Component({
@@ -7,13 +7,20 @@ import { Question } from '@shared/models/question';
   styleUrls: ['./card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
   @Input() question: Question;
-  @Input() isDisableForm: boolean;
+  @Input() statusQuestion: 'answered' | 'unanswered' = 'unanswered';
 
-  constructor() { }
+  @Output() answeredQuestion: EventEmitter<Question> = new EventEmitter<Question>();
+  @Output() revertQuestion: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  ngOnInit(): void {
+  constructor() {}
+
+  answered(question: Question): void {
+    this.answeredQuestion.emit(question);
   }
 
+  revert(): void {
+    this.revertQuestion.emit(true);
+  }
 }

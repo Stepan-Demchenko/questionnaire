@@ -5,11 +5,12 @@ export interface Question {
   title: string;
   type: QuestionType;
   options: Option[];
-  answer?: Option[];
+  answer?: Option[] | string;
   createdAt: Date;
 }
 
 export interface Option {
   id: string;
   title: string;
+  checked?: boolean;
 }

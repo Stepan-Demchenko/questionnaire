@@ -64,7 +64,7 @@ export class CreateComponent implements OnInit, OnDestroy {
       id: Math.random().toString(36).substring(7),
       createdAt: new Date(),
     });
-    this.router.navigate(['/management']);
+    this.router.navigate(['']);
   }
 
   private createQuestionForm(type: QuestionType): void {

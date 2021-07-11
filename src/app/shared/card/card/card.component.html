@@ -1,8 +1,20 @@
 <form class="card">
-  <app-answer-question-form [question]="question"></app-answer-question-form>
-<!--  <section class="card__footer">-->
-<!--    <p><app-button text="&#9940; Remove"></app-button></p>-->
-<!--    <p><app-button text="&#9881; Edit"></app-button></p>-->
-<!--    <p>{{question.createdAt | date: 'medium'}}</p>-->
-<!--  </section>-->
+    <app-answer-question-form
+        [status]="statusQuestion"
+        [question]="question"
+        (questionChanged)="answered($event)"
+    ></app-answer-question-form>
+    <button
+        (click)="revert()"
+        class="card__actions card__actions__undo"
+        *ngIf="statusQuestion === 'answered'"
+    >
+        &#8617; Revert
+    </button>
+    <p class="card__actions card__actions__date">{{ question.createdAt | date: "medium" }}</p>
+    <!--  <section class="card__footer">-->
+    <!--    <p><app-button text="&#9940; Remove"></app-button></p>-->
+    <!--    <p><app-button text="&#9881; Edit"></app-button></p>-->
+
+    <!--  </section>-->
 </form>

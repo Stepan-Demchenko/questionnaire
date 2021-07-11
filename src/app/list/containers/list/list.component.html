@@ -1,32 +1,72 @@
-<ng-container *ngIf="questions$ | async as questions">
-  <article class="list">
-    <div>
-      <h2>Not Answered Questions</h2>
-      <label class="select" for="slct">
-        <select id="slct" [(ngModel)]="orderUnanswered">
-          <option [value]="order.DESC">Oldest</option>
-          <option [value]="order.ASC" selected>Newest</option>
-        </select>
-        <svg>
-          <use xlink:href="#select-arrow-down"></use>
-        </svg>
-      </label>
-      <svg class="sprites">
-        <symbol id="select-arrow-down" viewbox="0 0 10 6">
-          <polyline points="1 1 5 5 9 1"></polyline>
-        </symbol>
-      </svg>
-      <ng-container *ngFor="let question of questions | sortByStatus: 'unanswered' | orderByDate: orderUnanswered">
-        <app-card [question]="question"></app-card>
-      </ng-container>
-    </div>
-    <div class="list__answered">
-      <h2>Answered Questions</h2>
-      <ng-container *ngFor="let question of questions | sortByStatus: 'answered' | orderByDate: orderAnswered">
-        <app-card [question]="question"></app-card>
-      </ng-container>
-    </div>
-  </article>
+<ng-container *ngIf="questions$ | async as questions; else noQuestions">
+    <article class="list">
+        <div>
+            <h2>Not Answered Questions</h2>
+            <ng-container *ngIf="questions | sortByStatus: 'unanswered' as unansweredQuestions">
+                <ng-container *ngIf="unansweredQuestions.length; else noQuestions">
+                    <label class="select" for="select">
+                        <select id="select" [(ngModel)]="orderUnanswered">
+                            <option [value]="order.DESC">Oldest</option>
+                            <option [value]="order.ASC" selected>Newest</option>
+                        </select>
+                        <svg>
+                            <use xlink:href="#select-arrow-down"></use>
+                        </svg>
+                    </label>
+                    <svg class="sprites">
+                        <symbol id="select-arrow-down" viewbox="0 0 10 6">
+                            <polyline points="1 1 5 5 9 1"></polyline>
+                        </symbol>
+                    </svg>
+
+                    <app-card
+                      statusQuestion="unanswered"
+                        *ngFor="let question of unansweredQuestions | orderByDate: orderUnanswered"
+                        [question]="question"
+                        (answeredQuestion)="answerToQuestion($event)"
+                    ></app-card>
+                </ng-container>
+                <app-button text="Add new Question" routerLink="/create"></app-button>
+            </ng-container>
+        </div>
+        <div class="list__answered">
+            <h2>Answered Questions</h2>
+            <ng-container *ngIf="questions | sortByStatus: 'answered' as answeredQuestions">
+                <ng-container *ngIf="answeredQuestions.length; else noAnsweredQuestions">
+                    <label class="select" for="slct">
+                        <select id="slct" [(ngModel)]="orderAnswered">
+                            <option [value]="order.DESC">Oldest</option>
+                            <option [value]="order.ASC" selected>Newest</option>
+                        </select>
+                        <svg>
+                            <use xlink:href="#select-arrow-down"></use>
+                        </svg>
+                    </label>
+                    <svg class="sprites">
+                        <symbol id="select-arrow-down" viewbox="0 0 10 6">
+                            <polyline points="1 1 5 5 9 1"></polyline>
+                        </symbol>
+                    </svg>
+                    <app-card
+                        (revertQuestion)="revertQuestion(question)"
+                        statusQuestion="answered"
+                        *ngFor="let question of answeredQuestions | orderByDate: orderAnswered"
+                        [question]="question"
+                    ></app-card>
+                </ng-container>
+                <ng-template #noAnsweredQuestions>
+                    <section class="empty-state">
+                        <h2>There are no questions</h2>
+                    </section>
+                </ng-template>
+            </ng-container>
+        </div>
+    </article>
 </ng-container>
 
-
+<ng-template #noQuestions>
+    <section class="empty-state">
+        <h2>There are no questions</h2>
+        <app-button text="Add new Question" routerLink="/create"></app-button>
+    </section>
+</ng-template>

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { StoreService } from '@core/services/store.service';
 import { Observable } from 'rxjs';
+
 import { Question } from '@shared/models/question';
 import { Order } from '@shared/enums/order.enum';
 
@@ -17,10 +18,17 @@ export class ListComponent implements OnInit {
   orderUnanswered: Order = Order.ASC;
   order = Order;
 
-  constructor(private readonly store: StoreService) {
-  }
+  constructor(private readonly store: StoreService) {}
 
   ngOnInit(): void {
     this.questions$ = this.store.getAll();
+  }
+
+  answerToQuestion(question: Question): void {
+    this.store.edit(question);
+  }
+
+  revertQuestion(question: Question): void {
+    this.store.revert(question);
   }
 }

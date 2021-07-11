@@ -9,10 +9,7 @@ import { AnswerQuestionFormComponent } from './answer-question-form/answer-quest
 import { DisableControlModule } from '@shared/directives/disable-control/disable-control.module';
 
 @NgModule({
-  declarations: [
-    QuestionFormComponent,
-    AnswerQuestionFormComponent
-  ],
+  declarations: [QuestionFormComponent, AnswerQuestionFormComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -21,9 +18,6 @@ import { DisableControlModule } from '@shared/directives/disable-control/disable
     FormsModule,
     DisableControlModule
   ],
-  exports: [
-    QuestionFormComponent,
-    AnswerQuestionFormComponent
-  ]
+  exports: [QuestionFormComponent, AnswerQuestionFormComponent]
 })
-export class QuestionFormModule { }
+export class QuestionFormModule {}
