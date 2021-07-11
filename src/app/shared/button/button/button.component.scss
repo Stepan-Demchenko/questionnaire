@@ -17,6 +17,10 @@
     background-color: #d9c6bd;
   }
 
+  &:disabled {
+    background-color: grey;
+  }
+
   //&:after {
   //  position: absolute;
   //  content: "";

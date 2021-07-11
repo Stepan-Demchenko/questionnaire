@@ -9,6 +9,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 export class ButtonComponent implements OnInit {
   @Input() text: string;
   @Input() typeOfButton: 'submit' | 'button' | 'reset' = 'button';
+  @Input() isDisabled = false;
 
   constructor() {
   }
