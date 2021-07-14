@@ -5,11 +5,13 @@ import { QuestionFormComponent } from './question-form/question-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from '@shared/button/button.module';
 import { InputModule } from '@shared/input/input.module';
-import { AnswerQuestionFormComponent } from './answer-question-form/answer-question-form.component';
+import { SingleQuestionFormComponent } from './single-question-form/single-question-form.component';
+import { MultipleQuestionFormComponent } from './multiple-question-form/multiple-question-form.component';
+import { OpenQuestionFormComponent } from './open-question-form/open-question-form.component';
 
 @NgModule({
-  declarations: [QuestionFormComponent, AnswerQuestionFormComponent],
+  declarations: [QuestionFormComponent, SingleQuestionFormComponent, MultipleQuestionFormComponent, OpenQuestionFormComponent],
   imports: [CommonModule, ReactiveFormsModule, ButtonModule, InputModule, FormsModule],
-  exports: [QuestionFormComponent, AnswerQuestionFormComponent]
+  exports: [QuestionFormComponent, SingleQuestionFormComponent]
 })
 export class QuestionFormModule {}

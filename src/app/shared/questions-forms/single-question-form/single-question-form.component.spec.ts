@@ -1,25 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AnswerQuestionFormComponent } from './answer-question-form.component';
+import { SingleQuestionFormComponent } from './single-question-form.component';
 
 describe('AnswerQuestionFormComponent', () => {
-  let component: AnswerQuestionFormComponent;
-  let fixture: ComponentFixture<AnswerQuestionFormComponent>;
+  let component: SingleQuestionFormComponent;
+  let fixture: ComponentFixture<SingleQuestionFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AnswerQuestionFormComponent ]
+      declarations: [ SingleQuestionFormComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AnswerQuestionFormComponent);
+    fixture = TestBed.createComponent(SingleQuestionFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should management', () => {
     expect(component).toBeTruthy();
   });
 });

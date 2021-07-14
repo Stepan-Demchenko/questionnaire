@@ -1,0 +1,13 @@
+<form [formGroup]="form">
+  <app-input formControlName="title"></app-input>
+  <div class="answer">
+    <app-input
+      formControlName="answer"
+      placeholder="Type your answer"
+    ></app-input>
+    <p class="error" *ngIf="form.touched && form.controls['answer'].getError('required')">
+      Please type your answer
+    </p>
+  </div>
+</form>
+<app-button *ngIf="!question.answer?.length" text="Accept" (click)="accept()"></app-button>

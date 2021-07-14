@@ -7,8 +7,8 @@ const routes: Routes = [
     loadChildren: () => import('./list/list.module').then(m => m.ListModule)
   },
   {
-    path: 'create',
-    loadChildren: () => import('./create/create.module').then(m => m.CreateModule)
+    path: 'manage',
+    loadChildren: () => import('./management/management.module').then(m => m.ManagementModule)
   }
 ];
 

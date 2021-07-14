@@ -1,6 +1,6 @@
 .answer {
-  padding-left: 20px;
   margin-bottom: 15px;
+  padding-left: 20px;
 }
 
 .option {
@@ -9,12 +9,17 @@
   align-items: baseline;
   gap: 15px;
 
-  &__input {
-    flex-grow: 2;
-  }
+   &__title {
+     margin-top: 15px;
+     margin-bottom: 15px;
+
+     font-size: 18px;
+   }
 }
+
 .error {
   padding: 10px;
+
   color: red;
   text-align: center;
 }

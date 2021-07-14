@@ -1,13 +1,9 @@
 <form class="card">
-    <app-answer-question-form
-        [status]="statusQuestion"
-        [question]="question"
-        (questionChanged)="answered($event)"
-    ></app-answer-question-form>
+  <ng-template #questionFormRef></ng-template>
     <button
         (click)="revert()"
         class="card__actions card__actions__undo"
-        *ngIf="statusQuestion === 'answered'"
+        *ngIf="statusQuestion === questionStatus.Answered"
     >
         &#8617; Revert
     </button>

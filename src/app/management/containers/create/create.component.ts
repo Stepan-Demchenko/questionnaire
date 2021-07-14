@@ -14,7 +14,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { pairwise, startWith, takeUntil, tap } from 'rxjs/operators';
 import { QuestionType } from '@shared/enums/question-type';
 import { Router } from '@angular/router';
-import { QuestionFormComponent } from '@shared/question-form/question-form/question-form.component';
+import { QuestionFormComponent } from '@shared/questions-forms/question-form/question-form.component';
 
 @Component({
   selector: 'app-create',
@@ -32,7 +32,7 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   constructor(private readonly storeService: StoreService,
               private readonly router: Router,
-              private readonly resolver: ComponentFactoryResolver,
+              private readonly componentFactoryResolver: ComponentFactoryResolver,
               private readonly fb: FormBuilder) {
   }
 
@@ -69,7 +69,7 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   private createQuestionForm(type: QuestionType): void {
     this.questionContainerRef.clear();
-    const factory = this.resolver.resolveComponentFactory(QuestionFormComponent);
+    const factory = this.componentFactoryResolver.resolveComponentFactory(QuestionFormComponent);
     const componentRef = this.questionContainerRef.createComponent(factory);
     componentRef.instance.type = type;
     componentRef.instance.submittedForm

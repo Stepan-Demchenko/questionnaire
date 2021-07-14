@@ -1,0 +1,17 @@
+<form [formGroup]="form">
+    <app-input formControlName="title"></app-input>
+    <div class="answer">
+        <div class="option" *ngFor="let option of optionsFormArray.controls; let i = index">
+            <div formArrayName="answer">
+                <ng-container [formArrayName]="i">
+                    <input formControlName="checked" type="checkbox" />
+                </ng-container>
+            </div>
+            <div class="option__title">{{ question.options[i].title }}</div>
+        </div>
+        <p class="error" *ngIf="form.touched && form.get('answer').getError('minSelected')">
+            Please chose one or more option of answer
+        </p>
+    </div>
+</form>
+<app-button *ngIf="!question.answer" text="Accept" (click)="accept()"></app-button>

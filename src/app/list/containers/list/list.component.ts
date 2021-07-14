@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Question } from '@shared/models/question';
 import { Order } from '@shared/enums/order.enum';
+import { QuestionStatus } from '@shared/enums/question-status';
 
 @Component({
   selector: 'app-list',
@@ -13,6 +14,7 @@ import { Order } from '@shared/enums/order.enum';
 })
 export class ListComponent implements OnInit {
   questions$: Observable<Question[]>;
+  questionStatus = QuestionStatus;
 
   orderAnswered: Order = Order.ASC;
   orderUnanswered: Order = Order.ASC;

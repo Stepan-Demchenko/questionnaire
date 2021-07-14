@@ -2,7 +2,7 @@
     <article class="list">
         <div>
             <h2>Not Answered Questions</h2>
-            <ng-container *ngIf="questions | sortByStatus: 'unanswered' as unansweredQuestions">
+            <ng-container *ngIf="questions | sortByStatus: questionStatus.Unanswered as unansweredQuestions">
                 <ng-container *ngIf="unansweredQuestions.length; else noQuestions">
                     <label class="select" for="select">
                         <select id="select" [(ngModel)]="orderUnanswered">
@@ -20,18 +20,18 @@
                     </svg>
 
                     <app-card
-                      statusQuestion="unanswered"
+                      [statusQuestion]="0"
                         *ngFor="let question of unansweredQuestions | orderByDate: orderUnanswered"
                         [question]="question"
                         (answeredQuestion)="answerToQuestion($event)"
                     ></app-card>
-                  <app-button text="Add new Question" routerLink="/create"></app-button>
+                  <app-button text="Add new Question" routerLink="/manage/create"></app-button>
                 </ng-container>
             </ng-container>
         </div>
         <div class="list__answered">
             <h2>Answered Questions</h2>
-            <ng-container *ngIf="questions | sortByStatus: 'answered' as answeredQuestions">
+            <ng-container *ngIf="questions | sortByStatus: questionStatus.Answered as answeredQuestions">
                 <ng-container *ngIf="answeredQuestions.length; else noAnsweredQuestions">
                     <label class="select" for="slct">
                         <select id="slct" [(ngModel)]="orderAnswered">
@@ -49,7 +49,7 @@
                     </svg>
                     <app-card
                         (revertQuestion)="revertQuestion(question)"
-                        statusQuestion="answered"
+                        [statusQuestion]="1"
                         *ngFor="let question of answeredQuestions | orderByDate: orderAnswered"
                         [question]="question"
                     ></app-card>
@@ -67,6 +67,6 @@
 <ng-template #noQuestions>
     <section class="empty-state">
         <h2>There are no questions</h2>
-        <app-button text="Add new Question" routerLink="/create"></app-button>
+        <app-button text="Add new Question" routerLink="/manage/create"></app-button>
     </section>
 </ng-template>
