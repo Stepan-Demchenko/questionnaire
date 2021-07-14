@@ -30,6 +30,8 @@ export class ListComponent implements OnInit {
     this.store.edit(question);
   }
 
+  trackByFn = (index, question: Question) => question.id;
+
   revertQuestion(question: Question): void {
     this.store.revert(question);
   }

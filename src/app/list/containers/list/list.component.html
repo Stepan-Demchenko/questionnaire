@@ -2,7 +2,9 @@
     <article class="list">
         <div>
             <h2>Not Answered Questions</h2>
-            <ng-container *ngIf="questions | sortByStatus: questionStatus.Unanswered as unansweredQuestions">
+            <ng-container
+                *ngIf="questions | sortByStatus: questionStatus.Unanswered as unansweredQuestions"
+            >
                 <ng-container *ngIf="unansweredQuestions.length; else noQuestions">
                     <label class="select" for="select">
                         <select id="select" [(ngModel)]="orderUnanswered">
@@ -20,18 +22,23 @@
                     </svg>
 
                     <app-card
-                      [statusQuestion]="0"
-                        *ngFor="let question of unansweredQuestions | orderByDate: orderUnanswered"
+                        [statusQuestion]="questionStatus.Unanswered"
+                        *ngFor="
+                            let question of unansweredQuestions | orderByDate: orderUnanswered;
+                            trackBy: trackByFn
+                        "
                         [question]="question"
                         (answeredQuestion)="answerToQuestion($event)"
                     ></app-card>
-                  <app-button text="Add new Question" routerLink="/manage/create"></app-button>
+                    <app-button text="Add new Question" routerLink="/manage/create"></app-button>
                 </ng-container>
             </ng-container>
         </div>
         <div class="list__answered">
             <h2>Answered Questions</h2>
-            <ng-container *ngIf="questions | sortByStatus: questionStatus.Answered as answeredQuestions">
+            <ng-container
+                *ngIf="questions | sortByStatus: questionStatus.Answered as answeredQuestions"
+            >
                 <ng-container *ngIf="answeredQuestions.length; else noAnsweredQuestions">
                     <label class="select" for="slct">
                         <select id="slct" [(ngModel)]="orderAnswered">
@@ -49,8 +56,11 @@
                     </svg>
                     <app-card
                         (revertQuestion)="revertQuestion(question)"
-                        [statusQuestion]="1"
-                        *ngFor="let question of answeredQuestions | orderByDate: orderAnswered"
+                        [statusQuestion]="questionStatus.Answered"
+                        *ngFor="
+                            let question of answeredQuestions | orderByDate: orderAnswered;
+                            trackBy: trackByFn
+                        "
                         [question]="question"
                     ></app-card>
                 </ng-container>
