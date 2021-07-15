@@ -14,4 +14,4 @@
         </p>
     </div>
 </form>
-<app-button *ngIf="!question.answer" text="Accept" (click)="accept()"></app-button>
+<app-button *ngIf="status === questionStatus.Unanswered" text="Accept" (click)="accept()"></app-button>

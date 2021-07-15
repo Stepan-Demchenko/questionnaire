@@ -1,25 +1,55 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <app-input formControlName="title" placeholder="Type your question"></app-input>
-  <p class="error" *ngIf="form.touched && form.get('title').getError('minlength')">
-    Question should have at least 4 symbols
-  </p>
-  <p class="error" *ngIf="form.touched && form.get('title').getError('required')">
-    Question field is required
-  </p>
-  <div formArrayName="options" *ngIf="type !== questionType.Open">
-    <div class="form-array" *ngFor="let option of optionsFormArray.controls; let i = index" [formGroupName]="i">
-      <app-input formControlName="title" placeholder="Option {{i+1}}"></app-input>
-      <p class="error" *ngIf="type !== questionType.Open && option.touched && option.get('title').getError('required')">
-        This field is required
-      </p>
-      <p class="error" *ngIf="type !== questionType.Open && option.touched && option.get('title').getError('minlength')">
-        Option should have at least 4 symbols
-      </p>
+    <app-input formControlName="title" placeholder="Type your question"></app-input>
+    <p class="error" *ngIf="form.touched && form.get('title').getError('minlength')">
+        Question should have at least 4 symbols
+    </p>
+    <p class="error" *ngIf="form.touched && form.get('title').getError('required')">
+        Question field is required
+    </p>
+    <div formArrayName="options" *ngIf="type !== questionType.Open">
+        <div
+            class="form-array"
+            *ngFor="let option of optionsFormArray.controls; let i = index; trackBy: trackByFn"
+            [formGroupName]="i"
+        >
+            <app-input formControlName="title" placeholder="Option {{ i + 1 }}"></app-input>
+            <button
+                type="button"
+                (click)="removeOption(i)"
+                class="remove-btn"
+                *ngIf="i > 1 && type === questionType.Multiple"
+            >
+                &#9940; Remove
+            </button>
+            <p
+                class="error"
+                *ngIf="
+                    type !== questionType.Open &&
+                    option.touched &&
+                    option.get('title').getError('required')
+                "
+            >
+                This field is required
+            </p>
+            <p
+                class="error"
+                *ngIf="
+                    type !== questionType.Open &&
+                    option.touched &&
+                    option.get('title').getError('minlength')
+                "
+            >
+                Option should have at least 4 symbols
+            </p>
+        </div>
     </div>
-  </div>
-  <div class="actions">
-    <app-button typeOfButton="submit" text="Ok"></app-button>
-    <app-button *ngIf="type === questionType.Multiple" typeOfButton="button" text="Add Option" (click)="addOption()"></app-button>
-  </div>
+    <div class="actions">
+        <app-button typeOfButton="submit" text="Ok"></app-button>
+        <app-button
+            *ngIf="type === questionType.Multiple"
+            typeOfButton="button"
+            text="Add Option"
+            (click)="addOption()"
+        ></app-button>
+    </div>
 </form>
-

@@ -1,5 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { Question } from '@shared/models/question';
 import { StoreService } from '@core/services/store.service';
 
 @Component({
@@ -8,11 +12,19 @@ import { StoreService } from '@core/services/store.service';
   styleUrls: ['./edit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditComponent implements OnInit {
+export class EditComponent {
+  readonly question$: Observable<Question | boolean> = this.activatedRoute.data.pipe(
+    map((data: { question: Question }) => data.question)
+  );
+
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly storeService: StoreService
+    private readonly storeService: StoreService,
+    private readonly router: Router
   ) {}
 
-  ngOnInit(): void {}
+  updateQuestion(question: Question): void {
+    this.storeService.edit(question);
+    this.router.navigate(['/manage']);
+  }
 }

@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { QuestionType } from '@shared/enums/question-type';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Question } from '@shared/models/question';
@@ -34,6 +27,8 @@ export class QuestionFormComponent implements OnInit {
     }
   }
 
+  trackByFn = (index: number) => index;
+
   get optionsFormArray(): FormArray {
     return this.form.controls.options as FormArray;
   }
@@ -58,10 +53,14 @@ export class QuestionFormComponent implements OnInit {
     );
   }
 
+  removeOption(index: number): void {
+    this.optionsFormArray.removeAt(index);
+  }
+
   onSubmit(): void {
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      this.submittedForm.emit({ ...this.form.value, type: this.type });
+      this.submittedForm.emit({ ...this.question, ...this.form.value });
     }
   }
 }

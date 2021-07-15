@@ -9,7 +9,6 @@ import {
   EventEmitter,
   Input,
   OnDestroy,
-  OnInit,
   Output,
   ViewChild,
   ViewContainerRef
@@ -30,33 +29,26 @@ import { Subject } from 'rxjs';
   styleUrls: ['./card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardComponent implements OnInit, AfterViewInit, OnDestroy {
+export class CardComponent implements AfterViewInit, OnDestroy {
   @ViewChild('questionFormRef', { read: ViewContainerRef }) questionContainerRef: ViewContainerRef;
 
   @Input() question: Question;
   @Input() statusQuestion: QuestionStatus;
+  @Input() showQuestionForm = true;
 
   @Output() answeredQuestion: EventEmitter<Question> = new EventEmitter<Question>();
-  @Output() revertQuestion: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   questionStatus = QuestionStatus;
+  questionType = QuestionType;
 
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private readonly componentFactoryResolver: ComponentFactoryResolver, private readonly cdr: ChangeDetectorRef) {}
 
-  ngOnInit(): void {}
-
   ngAfterViewInit(): void {
-    this.createQuestionForm();
-  }
-
-  answered(question: Question): void {
-    this.answeredQuestion.emit(question);
-  }
-
-  revert(): void {
-    this.revertQuestion.emit(true);
+    if (this.showQuestionForm) {
+      this.createQuestionForm();
+    }
   }
 
   createQuestionForm(): void {
@@ -70,7 +62,6 @@ export class CardComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       case QuestionType.Single: {
         factory = this.componentFactoryResolver.resolveComponentFactory(SingleQuestionFormComponent);
-
         break;
       }
       case QuestionType.Multiple: {

@@ -1,1 +1,23 @@
-<p>manage works!</p>
+<article class="manage-container">
+    <h1 class="manage-container__head">Manage page</h1>
+    <section class="manage-container__questions" *ngIf="(questions$ | async).length">
+        <app-card
+            [showQuestionForm]="false"
+            *ngFor="let question of questions$ | async; trackBy: trackByFn"
+            [question]="question"
+            [statusQuestion]="questionStatus.Answered"
+        >
+            <ng-container bottom-actions>
+                <button routerLink="/manage/edit/{{ question.id }}" class="actions__btn">
+                    &#9881; Edit
+                </button>
+                <button
+                    (click)="removeQuestion(question.id)"
+                    class="actions__btn actions__btn__remove"
+                >
+                    &#9747; Remove
+                </button>
+            </ng-container>
+        </app-card>
+    </section>
+</article>

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateComponent } from './containers/create/create.component';
 import { EditComponent } from './containers/edit/edit.component';
 import { ManageComponent } from './containers/manage/manage.component';
+import { EditQuestionResolver } from './resolvers/edit-question.resolver';
 
 const routes: Routes = [
   {
@@ -15,12 +16,16 @@ const routes: Routes = [
   },
   {
     path: 'edit/:id',
-    component: EditComponent
+    component: EditComponent,
+    resolve: {
+      question: EditQuestionResolver
+    }
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [EditQuestionResolver]
 })
 export class ManagementRoutingModule {}

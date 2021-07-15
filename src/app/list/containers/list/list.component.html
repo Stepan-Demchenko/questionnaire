@@ -55,14 +55,19 @@
                         </symbol>
                     </svg>
                     <app-card
-                        (revertQuestion)="revertQuestion(question)"
                         [statusQuestion]="questionStatus.Answered"
                         *ngFor="
                             let question of answeredQuestions | orderByDate: orderAnswered;
                             trackBy: trackByFn
                         "
                         [question]="question"
-                    ></app-card>
+                    >
+                        <ng-container top-actions>
+                            <button (click)="revertQuestion(question)" class="revert-btn">
+                                &#8617; Revert
+                            </button>
+                        </ng-container>
+                    </app-card>
                 </ng-container>
                 <ng-template #noAnsweredQuestions>
                     <section class="empty-state">

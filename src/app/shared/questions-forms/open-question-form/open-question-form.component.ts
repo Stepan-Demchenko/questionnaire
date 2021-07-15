@@ -17,6 +17,7 @@ export class OpenQuestionFormComponent implements OnInit, QuestionFormInterface 
   @Output() questionChanged: EventEmitter<Partial<Question>> = new EventEmitter<Partial<Question>>();
 
   form: FormGroup;
+  questionStatus = QuestionStatus;
 
   constructor(private readonly fb: FormBuilder) {}
 

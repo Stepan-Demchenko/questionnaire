@@ -15,7 +15,7 @@
 
   transition: all 0.5s;
 
-  &__actions {
+  &__top-actions {
     position: absolute;
     top: 10px;
 
@@ -34,10 +34,24 @@
     }
   }
 
-  &__footer {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  &__bottom-actions {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
+
+  &__title {
+    margin-top: 25px;
+
+    text-align: center;
+  }
+
+  &__type {
+    position: absolute;
+    bottom: 15px;
+    left: 10px;
+
+    color: grey;
   }
 
   &:hover {

@@ -1,1 +1,8 @@
-<p>edit works!</p>
+<section class="edit-container" *ngIf="question$ | async as question">
+    <h1>Edit question</h1>
+    <app-question-form
+        [question]="question"
+        [type]="question.type"
+        (submittedForm)="updateQuestion($event)"
+    ></app-question-form>
+</section>

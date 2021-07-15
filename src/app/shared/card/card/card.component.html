@@ -1,11 +1,28 @@
 <form class="card">
-  <ng-template #questionFormRef></ng-template>
-    <button
-        (click)="revert()"
-        class="card__actions card__actions__undo"
-        *ngIf="statusQuestion === questionStatus.Answered"
-    >
-        &#8617; Revert
-    </button>
-    <p class="card__actions card__actions__date">{{ question.createdAt | date: "medium" }}</p>
+    <ng-template #questionFormRef></ng-template>
+    <div class="card__top-actions">
+        <ng-content select="[top-actions]"></ng-content>
+    </div>
+    <div class="card__bottom-actions">
+        <ng-content select="[bottom-actions]"></ng-content>
+    </div>
+    <p class="card__top-actions card__top-actions__date">
+        {{ question.createdAt | date: "medium" }}
+    </p>
+    <ng-container *ngIf="!showQuestionForm">
+        <div class="card__type">
+            <p [ngSwitch]="question.type">
+                <ng-container *ngSwitchCase="questionType.Multiple">
+                    Multiple option question
+                </ng-container>
+                <ng-container *ngSwitchCase="questionType.Single">
+                    Single option question
+                </ng-container>
+                <ng-container *ngSwitchCase="questionType.Open">Open question</ng-container>
+            </p>
+        </div>
+        <h4 class="card__title">
+            {{ question.title }}
+        </h4>
+    </ng-container>
 </form>

@@ -1,0 +1,30 @@
+.manage-container {
+  margin-top: 35px;
+
+  &__head {
+    text-align: center;
+  }
+
+  &__questions {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+  }
+}
+
+.actions {
+  &__btn {
+    background: transparent;
+    border: unset;
+    cursor: pointer;
+
+    &__remove {
+      right: 10px;
+
+      color: red;
+    }
+  }
+}

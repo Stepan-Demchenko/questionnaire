@@ -21,17 +21,11 @@ export class StoreService {
 
   getOne(id: string): Observable<Question | undefined> {
     this.questions.next(JSON.parse(this.localStorage.getItem(this.QUESTION_KEY)));
-    return this.stream.pipe(
-      map((questions: Question[] | null) => {
-        return questions.find((question: Question) => question.id === id);
-      })
-    );
+    return this.stream.pipe(map((questions: Question[] | null) => questions.find((question: Question) => question.id === id)));
   }
 
   add(question: Question): void {
-    const allQuestions: Question[] | null = JSON.parse(
-      this.localStorage.getItem(this.QUESTION_KEY)
-    );
+    const allQuestions: Question[] | null = JSON.parse(this.localStorage.getItem(this.QUESTION_KEY));
     if (allQuestions && allQuestions.length) {
       allQuestions.push(question);
       this.updateLocalStorageAndStream(allQuestions);
@@ -41,9 +35,7 @@ export class StoreService {
   }
 
   edit(question: Question): void {
-    const allQuestions: Question[] | null = JSON.parse(
-      this.localStorage.getItem(this.QUESTION_KEY)
-    );
+    const allQuestions: Question[] | null = JSON.parse(this.localStorage.getItem(this.QUESTION_KEY));
     const foundedIndex = allQuestions.findIndex((qs: Question) => qs.id === question.id);
     if (foundedIndex !== -1) {
       allQuestions[foundedIndex] = question;
@@ -52,9 +44,7 @@ export class StoreService {
   }
 
   revert(question: Question): void {
-    const allQuestions: Question[] | null = JSON.parse(
-      this.localStorage.getItem(this.QUESTION_KEY)
-    );
+    const allQuestions: Question[] | null = JSON.parse(this.localStorage.getItem(this.QUESTION_KEY));
     const foundedIndex = allQuestions.findIndex((qs: Question) => qs.id === question.id);
     if (foundedIndex !== -1) {
       allQuestions[foundedIndex] = { ...allQuestions[foundedIndex], answer: undefined };
@@ -63,9 +53,7 @@ export class StoreService {
   }
 
   delete(id: string): void {
-    const allQuestions: Question[] | null = JSON.parse(
-      this.localStorage.getItem(this.QUESTION_KEY)
-    );
+    const allQuestions: Question[] | null = JSON.parse(this.localStorage.getItem(this.QUESTION_KEY));
     const foundedIndex = allQuestions.findIndex((question: Question) => question.id === id);
     if (foundedIndex) {
       allQuestions.splice(foundedIndex);
