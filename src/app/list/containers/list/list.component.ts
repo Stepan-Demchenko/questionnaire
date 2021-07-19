@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Question } from '@shared/models/question';
 import { Order } from '@shared/enums/order.enum';
 import { QuestionStatus } from '@shared/enums/question-status';
+import { SelectOption } from '@shared/select/select/select.component';
 
 @Component({
   selector: 'app-list',
@@ -19,6 +20,17 @@ export class ListComponent implements OnInit {
   orderAnswered: Order = Order.ASC;
   orderUnanswered: Order = Order.ASC;
   order = Order;
+
+  sortOptions: SelectOption[] = [
+    {
+      title: 'Newest',
+      value: Order.ASC
+    },
+    {
+      title: 'Oldest',
+      value: Order.DESC
+    }
+  ];
 
   constructor(private readonly store: StoreService) {}
 

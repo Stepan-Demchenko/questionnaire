@@ -1,0 +1,10 @@
+<label class="select" for="select">
+    <select id="select" [ngModel]="value" (change)="updateValue(select.value)" #select>
+        <option *ngFor="let option of items" [value]="option.value">
+            {{ option.title }}
+        </option>
+    </select>
+    <svg>
+        <use xlink:href="#select-arrow-down"></use>
+    </svg>
+</label>

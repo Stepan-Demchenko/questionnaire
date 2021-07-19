@@ -1,0 +1,67 @@
+.select {
+  position: relative;
+
+  width: 100%;
+  min-width: 200px;
+
+  svg {
+    position: absolute;
+    top: calc(33% - 3px);
+    right: 12px;
+
+    width: 10px;
+    height: 6px;
+    pointer-events: none;
+    fill: none;
+    stroke: #9098a9;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  select {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 7px 40px 7px 12px;
+
+    font-size: 16px;
+    font-family: inherit;
+
+    background: white;
+    border: 1px solid #e8eaed;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px -2px #9098a9;
+    cursor: pointer;
+
+    transition: all 150ms ease;
+    appearance: none;
+
+    &:hover {
+      + {
+        svg {
+          stroke: #0077ff;
+        }
+      }
+    }
+
+    &:focus {
+      border-color: #0077ff;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(0, 119, 255, 0.2);
+    }
+
+    &:required {
+      &:invalid {
+        color: #5a667f;
+      }
+    }
+
+    option {
+      color: #223254;
+    }
+
+    option[value=""][disabled] {
+      display: none;
+    }
+  }
+}

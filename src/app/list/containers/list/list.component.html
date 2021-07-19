@@ -6,21 +6,7 @@
                 *ngIf="questions | sortByStatus: questionStatus.Unanswered as unansweredQuestions"
             >
                 <ng-container *ngIf="unansweredQuestions.length; else noQuestions">
-                    <label class="select" for="select">
-                        <select id="select" [(ngModel)]="orderUnanswered">
-                            <option [value]="order.DESC">Oldest</option>
-                            <option [value]="order.ASC" selected>Newest</option>
-                        </select>
-                        <svg>
-                            <use xlink:href="#select-arrow-down"></use>
-                        </svg>
-                    </label>
-                    <svg class="sprites">
-                        <symbol id="select-arrow-down" viewbox="0 0 10 6">
-                            <polyline points="1 1 5 5 9 1"></polyline>
-                        </symbol>
-                    </svg>
-
+                  <app-select [(ngModel)]="orderUnanswered" [items]="sortOptions"></app-select>
                     <app-card
                         [statusQuestion]="questionStatus.Unanswered"
                         *ngFor="
@@ -40,21 +26,8 @@
                 *ngIf="questions | sortByStatus: questionStatus.Answered as answeredQuestions"
             >
                 <ng-container *ngIf="answeredQuestions.length; else noAnsweredQuestions">
-                    <label class="select" for="slct">
-                        <select id="slct" [(ngModel)]="orderAnswered">
-                            <option [value]="order.DESC">Oldest</option>
-                            <option [value]="order.ASC" selected>Newest</option>
-                        </select>
-                        <svg>
-                            <use xlink:href="#select-arrow-down"></use>
-                        </svg>
-                    </label>
-                    <svg class="sprites">
-                        <symbol id="select-arrow-down" viewbox="0 0 10 6">
-                            <polyline points="1 1 5 5 9 1"></polyline>
-                        </symbol>
-                    </svg>
-                    <app-card
+                  <app-select [(ngModel)]="orderAnswered" [items]="sortOptions"></app-select>
+                  <app-card
                         [statusQuestion]="questionStatus.Answered"
                         *ngFor="
                             let question of answeredQuestions | orderByDate: orderAnswered;

@@ -1,9 +1,10 @@
 <article class="manage-container">
     <h1 class="manage-container__head">Manage page</h1>
     <section class="manage-container__questions" *ngIf="(questions$ | async).length">
+        <app-select [items]="sortOptions" [(ngModel)]="sort"></app-select>
         <app-card
             [showQuestionForm]="false"
-            *ngFor="let question of questions$ | async; trackBy: trackByFn"
+            *ngFor="let question of questions$ | async | orderByDate: sort; trackBy: trackByFn"
             [question]="question"
             [statusQuestion]="questionStatus.Answered"
         >
